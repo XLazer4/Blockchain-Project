@@ -1,6 +1,6 @@
 require('babel-register');
 require('babel-polyfill');
-//again
+//test
 module.exports = {
   networks: {
     development: {
