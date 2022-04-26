@@ -28,4 +28,15 @@ contract EthSwap {
 
         emit TokenPurchased(msg.sender,address(token),tokenamount,rate);
     }
+
+    function selltokens(uint _amount) public payable {
+        uint etheramount = _amount/rate;
+
+        //transferring tokens to this contract
+        token.transferFrom(msg.sender, address(this), _amount);
+        //transferring ether
+        msg.sender.transfer(etheramount);
+
+
+    }
 }
