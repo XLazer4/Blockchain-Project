@@ -22,6 +22,7 @@ contract EthSwap {
     function buytokens() public payable {
         uint tokenamount = msg.value * rate; // amount of ether used by user * rate of our token
 
+        //checking if ethswap has enough tokens
         require(token.balanceOf(address(this)) >= tokenamount);
 
         token.transfer(msg.sender,tokenamount);
@@ -32,6 +33,9 @@ contract EthSwap {
     function selltokens(uint _amount) public payable {
         uint etheramount = _amount/rate;
 
+        require(token.balanceOf(msg.sender) >= _amount);
+
+        require((address(this).balance) >= etheramount);
         //transferring tokens to this contract
         token.transferFrom(msg.sender, address(this), _amount);
         //transferring ether
